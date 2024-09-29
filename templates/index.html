@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+    const timeInput = document.getElementById('time-interval');
+
+    timeInput.addEventListener('input', () => {
+    const inputValue = timeInput.value.trim();
+
+    if (inputValue === '') {
+        // Handle empty input
+        console.log('Time interval is empty.');
+    } else {
+        // Validate the input format
+        const regex = /^(?:\d+[smh])+$/;
+        if (!regex.test(inputValue)) {
+        console.log('Invalid time interval format. Please use "s" for seconds, "m" for minutes, and "h" for hours.');
+        } else {
+        // Convert the input to a time object
+        const timeParts = inputValue.match(/\d+[smh]/g);
+        let totalSeconds = 0;
+        for (const part of timeParts) {
+            const value = parseInt(part.slice(0, -1));
+            const unit = part.slice(-1);
+            if (unit === 's') {
+            totalSeconds += value;
+            } else if (unit === 'm') {
+            totalSeconds += value * 60;
+            } else if (unit === 'h') {
+            totalSeconds += value * 3600;
+            }
+        }
+
+        // Use the calculated totalSeconds for your application
+        console.log('Total seconds:', totalSeconds);
+        }
+    }
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+    <div class="pageTitle">
+        <h1>Medicine Dispensery</h1>
+        <p id="countdown"></p>
+      
+        <script>
+          function countdown(seconds) {
+            let timeLeft = seconds;
+
+            const interval = setInterval(() => {
+                timeLeft--;
+                document.getElementById("countdown").innerHTML = timeLeft + " seconds";
+
+                if (timeLeft <= 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").innerHTML = "Time's up!";
+                }
+            }, 1000);
+          }
+            window.onload = function() {
+            countdown(30); // Replace 30 with your desired initial seconds
+            };
+        </script>
+    </div>
+
+    <div class="medList">
+        <h1 class="medListTitle">
+            Medicine List
+        </h1>
+        <ul>
+            {% for med in medList %}
+            <li class="medListItems">
+                {{ med[0] }} - {{ med[1] }}
+            </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <div class="form">
+        <form action="/addMed" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Name of Medicine"><br><br>
+        
+            <label for="time-interval">Time Interval:</label>
+            <input type="text" id="time-interval" name="time-interval" placeholder="e.g., 30s, 1m, 2h">
+        
+            <input type="submit" value="Submit">
+          </form>   
+    </div>
+{% endblock %}

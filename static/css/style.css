@@ -1,0 +1,69 @@
+.background {
+    background-color: hsl(45, 29%, 97%);
+}
+
+.pageTitle {
+    float: left;
+    top: 0;
+    left: 0;
+    margin-left: 3em;
+}
+
+.medList {
+    float: right; /* Or use position: absolute; or position: fixed; */
+    top: 0;
+    right: 0;
+    margin-right: 3em;
+    margin-top: 12%;
+    text-align: center;
+}
+
+.medListTitle {
+    text-decoration: underline;
+}
+
+.medListItems {
+    list-style: none; /* Remove bullet points */
+    font-size: 35px;
+    /*margin-right: 1em;*/
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.formLabel {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+input[type="submit"] {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius:  
+   3px;
+    cursor: pointer;
+  }
+  
+input[type="submit"]:hover {
+    background-color:  
+   #3e8e41;
+  }
